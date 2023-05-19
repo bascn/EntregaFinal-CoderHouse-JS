@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- LIBRERIAS IMPORTADAS AL PROYECTO, ANIMATE CSS Y MOMENT JS. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script type="text/JavaScript" src="https://MomentJS.com/downloads/moment-with-locales.js"></script>
+    <!-- BOOSTRAP  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png">
+    <title>Sistema de Inventario - Bastián Caba Navarro</title>
+</head>
+
+<body>
+    <br>
+    <div id="loader" class="center"></div>
+    <div class="text-center">
+        <h3 style="font-size: 55px; color: white" class="animate__animated animate__flash">Sistema de Gestión de Inventarios <br>
+            Ingreso de Productos</h3>
+        <br>
+        
+        <img src="./img/inventory.png" alt="" srcset="">
+        <div style="font-size:25px; color: #d5f9ff" class="sombra" id="fechahoy"></div>
+        <br>
+        <br>
+        <div class="fondoDiv text-center" style="width: 550px; text-align: center; display: inline-block;">
+            <div class="form-group">
+                <b>Para ver, editar o borrar un registro.</b>
+                <ol>
+                    <li>Ingresa el ID del producto a consultar en la barra de abajo.</li>
+                    <li>Presiona el botón Consultar Producto ID o Consultar Producto ID a API</li>
+                    <li>a) Si el ID del producto coincide con alguno del sistema, se desplegarán los otros botones. <br>
+                    b) Si el ID del producto coincide con alguno del API, se mostrará y agregará al inventario.</li>
+                </ol>
+                <br>
+            </div>
+        </div>
+        <div class="fondoDiv text-center" style="width: 550px; text-align: center; display: inline-block;">
+            <div class="form-group">
+                <b style="">Para añadir un registro.</b>
+                <ol>
+                    <li>Completar los campos a continuación</li>
+                    <li>Presiona el botón Ingresar</li>
+                    <li>Comprueba tu lista de items presionando Listar todos los productos.</li>
+                    <li>Puedes traer una lista ya de inventario desde la API con el botón correspondiente.</li>
+                    <li>Elimina todo del inventario con Eliminar Todo</li>
+                </ol>
+                <br>
+            </div>
+        </div>
+        <br><br>
+        <form id="form-registro" class="col-6 mx-auto row fondoDiv" style="padding-bottom: 10px;">
+            <div class="col-6">
+                <label for="titular">Numero Identificador Producto (ID)</label>
+                <input type="text" id="numero" class="form-control" placeholder="Producto ID">
+            </div>
+            <div class="col-6">
+                <label for="contacto">Producto Descripcion</label>
+                <input type="text" id="producto" class="form-control" placeholder="Descripcion">
+            </div>
+            <div class="col-6">
+                <label for="saldo">Cantidad en Stock</label>
+                <input type="number" min="0" id="cantidad" class="form-control" placeholder="Cantidad">
+            </div>
+            <div class="col-6   ">
+                <label for="saldo">Valor de Venta</label>
+                <input type="number" min="1" id="valor" class="form-control" placeholder="Valor">
+            </div>
+            <div class="mt-4">    
+                <button type="submit" style="color: #053e4a" id="registrar" class="btn btn-info">Ingresar</button>
+            </div>
+
+        </form>
+        <br>
+        <form class="col-lg-9 mx-auto row">
+            <div class="fondoDiv">
+                <div class="col-6 container">
+                    <label for="titularConsulta">Producto ID a Consultar</label>
+                    <input type="text" id="productoConsulta" class="form-control"
+                        placeholder="Ingresar Producto ID a Consultar">
+                </div>
+                <div class="container mt-4">
+                    <button id="consultar" style="color: #053e4a" class="btn btn-info">Consultar Producto ID</button>
+                    <button id="consultarAPI" style="color: #55daf5" class="btn btn-outline-info">Consultar Producto ID A Api</button>
+                    <button id="listar" style="color: #053e4a" class="btn btn-info">Listar todos los Productos</button>
+                    <button id="listarAPI" style="color: #55daf5" class="btn btn-outline-info">Listar todos los Productos API</button>
+                    <button id="eliminar" style="color: #053e4a; display: none;" class="btn btn-info">Eliminar Por
+                        Producto ID</button>
+                    <button id="editar" style="color: #053e4a; display: none;" class="btn btn-info">Editar Por Producto
+                        ID</button>
+                    <button id="eliminarTodo" style="color: #053e4a" class="btn btn-info">Eliminar Todo</button>
+                    <br><br>
+                </div>
+            </div>
+        </form>
+        <center>
+            <br>
+            <button id="productos" style="color: #053e4a" class="btn btn-info">Limpiar Lista</button>
+            <br>
+        </center>
+        <h3 id="prod" class="animate__animated animate__bounce">Listado de Productos</h2>
+    </div>
+    <script src="./js/Inventario.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+
+</html>
